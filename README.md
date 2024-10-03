@@ -25,6 +25,9 @@
 - **User-Friendly Interface:** Intuitive design for easy navigation and analysis of extracted data.
 - **Lightweight Performance:** Minimal impact on browsing speed and resource usage.
 
+
+<img width="1501" alt="Screenshot 2024-10-03 at 17 09 01" src="https://github.com/user-attachments/assets/6e5dec07-c1d5-4271-b863-d8a421f59e6d">
+
 ## Installation
 
 To install Extractify extension, follow these steps:
@@ -53,6 +56,11 @@ To install Extractify extension, follow these steps:
 
 Extractify extension works by finding all JavaScript files from the webpage you're visiting and then extracting all endpoints and relative paths from these script files.
 
+
+https://github.com/user-attachments/assets/e66f6e99-3c8f-4692-a2fc-dc0b02a368a1
+
+
+
 ## Contributing
 
 We believe that collaboration and community input are essential for creating a robust tool. If you're passionate about web security or software development, we invite you to contribute to Extractify Extension! Here’s how you can get involved:
@@ -63,8 +71,11 @@ We believe that collaboration and community input are essential for creating a r
 
 Join us in making Extractify Extension even better for everyone!
 
+## Contact
+
+**X:** https://x.com/sharo_k_h
+**Email:** ataiesharokh@gmail.com
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://choosealicense.com/licenses/mit/) file for more details.
-
-## Contact

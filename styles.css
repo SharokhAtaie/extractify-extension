@@ -226,3 +226,6 @@ span {
 .close:hover {
   color: #fff; /* Change color on hover for better visibility */
 }
+
+.scope-container label {
+  font-size: 12px; /* Adjust this value as needed */

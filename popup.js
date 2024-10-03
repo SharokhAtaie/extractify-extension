@@ -65,6 +65,10 @@ const browserAPI = typeof browser !== "undefined" ? browser : chrome;
 // DOMContentLoaded Handler
 document.addEventListener("DOMContentLoaded", initPopup);
 
+let currentDomain;
+let allURLs = [];
+let allEndpoints = [];
+
 async function initPopup() {
   startAnimation();
 
@@ -73,12 +77,14 @@ async function initPopup() {
       active: true,
       currentWindow: true,
     });
-    const tabUrl = getDomainFromUrl(currentTab.url);
-    if (!tabUrl) throw new Error("Domain extraction failed.");
+    currentDomain = getDomainFromUrl(currentTab.url);
+    if (!currentDomain) throw new Error("Domain extraction failed.");
 
-    const storedData = await browserAPI.storage.local.get(tabUrl);
-    if (storedData[tabUrl]) {
-      processStoredData(storedData[tabUrl], tabUrl);
+    const storedData = await browserAPI.storage.local.get(currentDomain);
+    if (storedData[currentDomain]) {
+      allURLs = storedData[currentDomain].urls;  // Store all URLs
+      allEndpoints = storedData[currentDomain].endpoints; // Store all endpoints
+      updateDisplay();
     }
   } catch (error) {
     console.error("Error initializing popup:", error);

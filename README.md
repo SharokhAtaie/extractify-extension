@@ -56,9 +56,7 @@ To install Extractify extension, follow these steps:
 
 Extractify extension works by finding all JavaScript files from the webpage you're visiting and then extracting all endpoints and relative paths from these script files.
 
-
 https://github.com/user-attachments/assets/e66f6e99-3c8f-4692-a2fc-dc0b02a368a1
-
 
 
 ## Contributing
@@ -70,6 +68,13 @@ We believe that collaboration and community input are essential for creating a r
 -   **Code Contributions:**  If you’re a developer, consider submitting enhancements or fixes.
 
 Join us in making Extractify Extension even better for everyone!
+
+### My friends that help me to create this tool
+https://x.com/0xb0hl00l
+
+https://x.com/gh_7o6
+
+https://x.com/ehsan_nkd
 
 ## Contact
 

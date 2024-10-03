@@ -1,0 +1,228 @@
+body {
+  font-family: "Arial", sans-serif;
+  background: #111;
+  color: white;
+  font-size: 60px;
+  text-shadow: 0 0 15px #411;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  height: 100%;
+  width: 550px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+header {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  position: relative;
+  height: 2px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.list-title {
+  margin: 1rem 0 0.5rem 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 170px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #1f1f1f;
+  box-sizing: border-box;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  background-color: #1f1f1f;
+  border: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.list li:hover {
+  background-color: #646464;
+  transition: background-color 0.2s ease;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.list-container {
+  margin-bottom: 1rem;
+}
+
+.parent-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Styling for the copy button */
+.copy-btn,
+.copy-btn-all,
+.info-button {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn-all {
+  margin-left: 4px;
+  margin-top: 7px;
+}
+
+.copy-btn:hover,
+.copy-btn-all:hover,
+.info-button:hover {
+  background-color: #555;
+}
+
+.copy-btn svg,
+.copy-btn-all svg,
+.info-button svg {
+  width: 17px;
+  height: 17px;
+  stroke: white;
+  fill: none;
+}
+
+.glow {
+  color: #f00;
+  text-shadow: 0 0 10px #f00;
+}
+
+span {
+  font-family: Consolas, Courier, monospace;
+  padding: 0 2px;
+}
+
+/* Parent container to hold the star and button */
+.item-actions {
+  display: flex; /* Align the star and copy button next to each other */
+  align-items: center; /* Align them vertically */
+  gap: 5px; /* Add space between the star and the copy button */
+}
+
+.dot-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.4rem;
+}
+
+.dot-ping {
+  position: absolute;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  background-color: rgba(240, 33, 33, 0.945);
+  opacity: 0.75;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.dot-core {
+  position: absolute;
+  height: 0.4rem;
+  width: 0.4rem;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgb(255, 0, 0);
+  background-color: rgb(255, 0, 0);
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: #1d1d1d;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Try limiting the width */
+  max-width: 600px; /* A fixed max-width to prevent it from expanding too much */
+  position: relative;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 8px; /* Optional: Rounded corners */
+  overflow: hidden; /* Ensures content does not overflow */
+}
+
+.modal-content p {
+  font-size: 0.3em;
+  line-height: 2;
+  margin: 10px 0; /* Space between paragraphs */
+  word-wrap: break-word; /* Breaks long words */
+}
+
+.modal-content a {
+  word-break: break-all; /* Breaks long URLs or text */
+  overflow-wrap: break-word; /* Ensures long text breaks properly */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.6em;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #fff; /* Change color on hover for better visibility */
+}

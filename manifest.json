@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Extractify",
+  "version": "1.0",
+  "description": "An extension for extract Endpoints and URLs from javascripts.",
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "logo.png"
+  }
+}

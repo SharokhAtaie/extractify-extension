@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extractify</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="loading">Extractify</h1>
+    </header>
+
+    <div class="container">
+      <!-- Endpoints Section -->
+      <div class="list-container">
+        <div class="parent-container">
+          <p class="list-title">Endpoints</p>
+          <button id="copy-endpoints-btn" class="copy-btn-all">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-copy"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path
+                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <ul id="endpoint-list" class="list">
+          <li class="empty">No Endpoints found for this page.</li>
+        </ul>
+      </div>
+
+      <!-- URLs Section -->
+      <div class="list-container">
+        <div class="parent-container">
+          <p class="list-title">URLs</p>
+          <button id="copy-urls-btn" class="copy-btn-all">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-copy"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path
+                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <ul id="url-list" class="list">
+          <li class="empty">No URLs found for this page.</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      <p>Extractify &copy; 2024</p>
+    </footer>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

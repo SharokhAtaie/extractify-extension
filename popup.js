@@ -19,10 +19,13 @@ const checkbox = document.getElementById('scope-checkbox');
 
 // Add an event listener to detect changes
 checkbox.addEventListener('change', function() {
-    updateDisplay();
+    updateDisplay(); // Update display based on the new state
+    // Save state when changed
+    localStorage.setItem('scopeCheckboxState', checkbox.checked); // Save the state
 });
 
-// Filter urls and endpoints based on scope
+
+
 function updateDisplay() {
   const urlsList = document.getElementById("url-list");
   const endpointsList = document.getElementById("endpoint-list");
@@ -31,7 +34,7 @@ function updateDisplay() {
   urlsList.innerHTML = '';
   endpointsList.innerHTML = '';
 
-  const isChecked = checkbox.checked;
+  const isChecked = checkbox.checked; // Get the checkbox state
 
   // Filter and display URLs
   const filteredURLs = isChecked
@@ -46,6 +49,7 @@ function updateDisplay() {
   updateList(urlsList, filteredURLs);
   updateList(endpointsList, filteredEndpoints);
 }
+
 
 
 // Utility function to extract the domain from a URL
@@ -84,14 +88,22 @@ async function initPopup() {
     if (storedData[currentDomain]) {
       allURLs = storedData[currentDomain].urls;  // Store all URLs
       allEndpoints = storedData[currentDomain].endpoints; // Store all endpoints
-      updateDisplay();
     }
+
+    // Restore checkbox state here
+    restoreCheckboxState(); // Restore the checkbox state
+    updateDisplay(); // Ensure the display updates based on the restored checkbox state
+
+    // Call processStoredData function
+    processStoredData({ urls: allURLs, endpoints: allEndpoints, newURLs: [], newEndpoints: [] }, currentDomain);
   } catch (error) {
     console.error("Error initializing popup:", error);
   }
 }
 
-// Process stored data (URLs, endpoints, and scroll position)
+
+
+// Process stored data (URLs, endpoints, scroll position, and checkbox state)
 function processStoredData({ urls, endpoints, newURLs, newEndpoints }, tabUrl) {
   const urlsList = document.getElementById("url-list");
   const endpointsList = document.getElementById("endpoint-list");
@@ -114,6 +126,26 @@ function processStoredData({ urls, endpoints, newURLs, newEndpoints }, tabUrl) {
   // Populate URL and Endpoint lists
   updateList(urlsList, urls, newURLs, "white", "red");
   updateList(endpointsList, endpoints, newEndpoints);
+  updateDisplay(); // Refresh the display based on the updated lists and checkbox state
+
+  // Save the checkbox state to local storage
+  const checkbox = document.getElementById('scope-checkbox');
+  localStorage.setItem('scopeCheckboxState', checkbox.checked);
+}
+
+
+// Restore checkbox state from local storage when initializing
+function restoreCheckboxState() {
+  const savedState = localStorage.getItem('scopeCheckboxState');
+  const checkbox = document.getElementById('scope-checkbox');
+  
+  // Check if the saved state exists
+  if (savedState !== null) {
+    checkbox.checked = savedState === 'true'; // Convert string to boolean
+  }
+  
+  // Call updateDisplay to apply filtering based on restored state
+  updateDisplay(); // Update display after checkbox state restoration
 }
 
 // Restore and save scroll position for each list (URLs/Endpoints)

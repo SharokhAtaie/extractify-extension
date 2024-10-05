@@ -29,7 +29,7 @@ header h1 {
 }
 
 .list-title {
-  margin: 1rem 0 0.5rem 0;
+  margin: 0.2rem 0 0.25rem 0; /* Change top margin to 0.5rem and bottom margin to 0.25rem */
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -225,4 +225,48 @@ span {
 
 .close:hover {
   color: #fff; /* Change color on hover for better visibility */
+}
+
+/* Container for the checkbox and label */
+.scope-container {
+  display: flex;
+  align-items: center;
+  margin: 0.12rem 0; /* Further decrease margin for less space */
+}
+
+/* Hide the default checkbox appearance */
+.scope-container input[type="checkbox"] {
+  display: none;
+}
+
+/* Style for the custom checkbox */
+.scope-container .custom-checkbox {
+  width: 12px; /* Size of the custom checkbox */
+  height: 12px;
+  border: 2px solid white; /* Border for the checkbox */
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 8px; /* Space between checkbox and label */
+  bottom: 1px; /* Adjust this value to vertically align the checkbox with the label */
+}
+
+/* When the checkbox is checked, fill the square but leave a little border */
+.scope-container input[type="checkbox"]:checked + label .custom-checkbox::after {
+  content: '';
+  position: absolute;
+  top: 0px; /* Adjusted for better alignment */
+  left: 0px;
+  width: 12px; /* Size of the filled square */
+  height: 12px;
+  background-color: white; /* Color of the filled square */
+  border-radius: 2px; /* Optional: rounded edges for the filled square */
+}
+
+/* Style for the label */
+.scope-container label {
+  font-size: 0.9rem; /* Adjust font size if necessary */
+  color: white;
+  display: flex;
+  align-items: center; /* Aligns label text vertically */
 }

@@ -17,16 +17,47 @@ const infoIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xm
 // Get the checkbox element
 const checkbox = document.getElementById('scope-checkbox');
 
-// Add an event listener to detect changes
-checkbox.addEventListener('change', function() {
-    updateDisplay(); // Update display based on the new state
-    // Save state when changed
-    localStorage.setItem('scopeCheckboxState', checkbox.checked); // Save the state
+// Browser API (cross-browser support)
+const browserAPI = typeof browser !== "undefined" ? browser : chrome;
+
+// Event Handler to listen for checkbox changes
+checkbox.addEventListener('change', async function() {
+    try {
+        // Retrieve the active tab in the current window
+        const [thisTab] = await browserAPI.tabs.query({
+            active: true,
+            currentWindow: true,
+        });
+
+        // Extract the domain from the tab's URL
+        const domain = getDomainFromUrl(thisTab.url);
+
+        // Fetch stored data for the domain from browser storage
+        const storedDataInStorage = await browserAPI.storage.local.get(domain);
+
+        // Check if the domain exists in the stored data
+        if (!storedDataInStorage[domain]) {
+            throw new Error(`No stored data found for domain: ${domain}`);
+        }
+
+        // Extract new URLs and new endpoints from the stored data
+        const newurls = storedDataInStorage[domain].newURLs;
+        const newendpoints = storedDataInStorage[domain].newEndpoints;
+
+        // Update the display based on the new state
+        updateDisplay(newurls, newendpoints);
+
+        // Save the state of the checkbox to local storage
+        localStorage.setItem('scopeCheckboxState', checkbox.checked);
+
+    } catch (error) {
+        // Log any errors that occur during the process
+        console.error('Error in checkbox change handler:', error);
+    }
 });
 
-
-
-function updateDisplay() {
+// Update the displayed URLs and Endpoints based on checkbox state
+function updateDisplay(newurls, newendpoints) {
   const urlsList = document.getElementById("url-list");
   const endpointsList = document.getElementById("endpoint-list");
 
@@ -38,16 +69,16 @@ function updateDisplay() {
 
   // Filter and display URLs
   const filteredURLs = isChecked
-    ? allURLs.filter(url => getDomainFromUrl(url.text) === currentDomain)
-    : allURLs;
+    ? allURLsList.filter(url => getDomainFromUrl(url.text) === currentDomain)
+    : allURLsList;
 
   // Filter and display endpoints based on the filename domain
   const filteredEndpoints = isChecked
-    ? allEndpoints.filter(endpoint => getDomainFromUrl(endpoint.filename) === currentDomain)
-    : allEndpoints;
+    ? allEndpointsList.filter(endpoint => getDomainFromUrl(endpoint.filename) === currentDomain)
+    : allEndpointsList;
 
-  updateList(urlsList, filteredURLs);
-  updateList(endpointsList, filteredEndpoints);
+  updateList(urlsList, filteredURLs, newurls, "white", "red");
+  updateList(endpointsList, filteredEndpoints, newendpoints);
 }
 
 
@@ -63,15 +94,13 @@ function getDomainFromUrl(url) {
   }
 }
 
-// Browser API (cross-browser support)
-const browserAPI = typeof browser !== "undefined" ? browser : chrome;
-
 // DOMContentLoaded Handler
 document.addEventListener("DOMContentLoaded", initPopup);
 
+// Variables to store URLs and endpoints
 let currentDomain;
-let allURLs = [];
-let allEndpoints = [];
+let allURLsList = [];
+let allEndpointsList = [];
 
 async function initPopup() {
   startAnimation();
@@ -86,22 +115,21 @@ async function initPopup() {
 
     const storedData = await browserAPI.storage.local.get(currentDomain);
     if (storedData[currentDomain]) {
-      allURLs = storedData[currentDomain].urls;  // Store all URLs
-      allEndpoints = storedData[currentDomain].endpoints; // Store all endpoints
+      allURLsList = storedData[currentDomain].urls;  // Store all URLs
+      allEndpointsList = storedData[currentDomain].endpoints; // Store all endpoints
+      // Restore checkbox state here
+      restoreCheckboxState(); // Restore the checkbox state
+      updateDisplay(); // Ensure the display updates based on the restored checkbox state
+
+      // Call processStoredData function
+      processStoredData(storedData[currentDomain], currentDomain);
     }
 
-    // Restore checkbox state here
-    restoreCheckboxState(); // Restore the checkbox state
-    updateDisplay(); // Ensure the display updates based on the restored checkbox state
 
-    // Call processStoredData function
-    processStoredData({ urls: allURLs, endpoints: allEndpoints, newURLs: [], newEndpoints: [] }, currentDomain);
   } catch (error) {
     console.error("Error initializing popup:", error);
   }
 }
-
-
 
 // Process stored data (URLs, endpoints, scroll position, and checkbox state)
 function processStoredData({ urls, endpoints, newURLs, newEndpoints }, tabUrl) {
@@ -115,6 +143,7 @@ function processStoredData({ urls, endpoints, newURLs, newEndpoints }, tabUrl) {
   const allURLs = [];
   urls.forEach((url) => allURLs.push(url.text));
   newURLs.forEach((url) => allURLs.push(url.text));
+
   // Handle copy buttons
   handleCopyButton("copy-urls-btn", allURLs);
 
@@ -126,7 +155,7 @@ function processStoredData({ urls, endpoints, newURLs, newEndpoints }, tabUrl) {
   // Populate URL and Endpoint lists
   updateList(urlsList, urls, newURLs, "white", "red");
   updateList(endpointsList, endpoints, newEndpoints);
-  updateDisplay(); // Refresh the display based on the updated lists and checkbox state
+  updateDisplay(newURLs, newEndpoints); // Refresh the display based on the updated lists and checkbox state
 
   // Save the checkbox state to local storage
   const checkbox = document.getElementById('scope-checkbox');
@@ -143,7 +172,6 @@ function restoreCheckboxState() {
   if (savedState !== null) {
     checkbox.checked = savedState === 'true'; // Convert string to boolean
   }
-  
   // Call updateDisplay to apply filtering based on restored state
   updateDisplay(); // Update display after checkbox state restoration
 }

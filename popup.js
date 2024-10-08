@@ -69,7 +69,7 @@ function updateDisplay(newurls, newendpoints) {
 
   // Filter and display URLs
   const filteredURLs = isChecked
-    ? allURLsList.filter(url => getDomainFromUrl(url.text) === currentDomain)
+    ? allURLsList.filter(url => getDomainFromUrl(url.filename) === currentDomain)
     : allURLsList;
 
   // Filter and display endpoints based on the filename domain

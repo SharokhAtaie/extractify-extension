@@ -15,7 +15,7 @@
 
 ## Overview
 
-**Extractify-extension** is a Chrome extension version of [Extractify](https://github.com/SharokhAtaie/extractify) tool designed for web security testing, enabling users to efficiently extract JavaScript files and their associated relative paths and endpoints from any webpage. This simple, lightweight tool is essential for security testers seeking to identify potential vulnerabilities in web applications.
+**Extractify-extension** is a browser extension version of [Extractify](https://github.com/SharokhAtaie/extractify) tool designed for web security testing, enabling users to efficiently extract JavaScript files and their associated relative paths and endpoints from any webpage. This simple, lightweight tool is essential for security testers seeking to identify potential vulnerabilities in web applications.
 
 ## Features
 
@@ -31,7 +31,7 @@
 ## Installation
 
 To install Extractify extension, follow these steps:
-
+#### Chrome:
 1. Clone the repository to your local machine:
    ```bash
    git clone https://github.com/SharokhAtaie/extractify-extension.git
@@ -42,13 +42,25 @@ To install Extractify extension, follow these steps:
 4.  Click the **Load unpacked** button.
     
 5.  Select the directory where the cloned repository is located.
+
+#### Firefox:
+1. Clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/SharokhAtaie/extractify-extension.git
+2.  Open Firefox and navigate to `about:debugging`
     
-6.  Extractify extension will now be installed and ready for use.
+3.  Navigate to `This Firefox`
+
+4.  Click on `Load temporary add-on`
+    
+5.  Select the directory where the cloned repository is located.
+    
+Extractify extension will now be installed and ready for use.
 
 ## Usage
 
-1.  Visit any webpage in Chrome.
-2.  Click on the Extractify extension icon in the Chrome toolbar.
+1.  Visit any webpage in your browser.
+2.  Click on the Extractify extension icon in the browser toolbar.
 3.  The extension will automatically scan the page for JavaScript files and display them, along with their relative paths and endpoints.
 4.  Click on any info button for more detailed information.
 

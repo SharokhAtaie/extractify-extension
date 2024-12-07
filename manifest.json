@@ -5,7 +5,8 @@
   "description": "An extension for extract Endpoints and URLs from javascripts.",
   "permissions": ["activeTab", "scripting", "storage", "tabs"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
